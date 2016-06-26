@@ -1,8 +1,9 @@
-package com.headfirst.beatbox;
+package com.headfirst.midi.basics;
 
 /**
  * Created by Tom on 5/2/2016.
  */
+
 import javax.sound.midi.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -19,7 +20,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 
-// copy paste from Stackoverflow, just curios what it does
+// copy paste from Stackoverflow, just curious what it does
 public class MidiPianola {
 
     private JComponent ui = null;
@@ -211,14 +212,14 @@ public class MidiPianola {
                     } catch (Exception useDefault) {
                     }
                     SpinnerNumberModel startModel =
-                            new SpinnerNumberModel(2,0,6,1);
+                            new SpinnerNumberModel(2, 0, 6, 1);
                     JOptionPane.showMessageDialog(
                             null,
                             new JSpinner(startModel),
                             "Start Octave",
                             JOptionPane.QUESTION_MESSAGE);
                     SpinnerNumberModel octavesModel =
-                            new SpinnerNumberModel(5,5,11,1);
+                            new SpinnerNumberModel(5, 5, 11, 1);
                     JOptionPane.showMessageDialog(
                             null,
                             new JSpinner(octavesModel),

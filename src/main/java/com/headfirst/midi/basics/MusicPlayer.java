@@ -1,4 +1,4 @@
-package com.headfirst.beatbox;
+package com.headfirst.midi.basics;
 
 import com.sun.media.sound.SoftSynthesizer;
 
@@ -26,7 +26,7 @@ public class MusicPlayer {
             (reference) to null does NOT help to quit properly.
              */
             player.open();
-        }catch (MidiUnavailableException e) {
+        } catch (MidiUnavailableException e) {
             e.printStackTrace();
         }
     }
@@ -44,6 +44,7 @@ public class MusicPlayer {
         music.player.close();
 
     }
+
     void playNote() {
         try {
             Sequence seq = new Sequence(Sequence.PPQ, 4);
@@ -71,7 +72,7 @@ public class MusicPlayer {
         player.start();
     }
 
-    void playManyInstruments() throws InvalidMidiDataException{
+    void playManyInstruments() throws InvalidMidiDataException {
         Sequence seq = new Sequence(Sequence.PPQ, 4);
         Track track = seq.createTrack();
         MidiEvent event = null;
@@ -119,7 +120,7 @@ public class MusicPlayer {
             try {
                 playSingleInstrument(Integer.parseInt(instr), Integer
                         .parseInt(note));
-            }catch (InvalidMidiDataException e) {
+            } catch (InvalidMidiDataException e) {
                 e.printStackTrace();
             }
             System.out.println();
@@ -127,7 +128,7 @@ public class MusicPlayer {
         }
     }
 
-    void playSingleInstrument(int num, int note) throws InvalidMidiDataException{
+    void playSingleInstrument(int num, int note) throws InvalidMidiDataException {
         Sequence seq = new Sequence(Sequence.PPQ, 4);
         Track track = seq.createTrack();
         MidiEvent event;
@@ -136,19 +137,19 @@ public class MusicPlayer {
         event = makeMidiEvent(ShortMessage.PROGRAM_CHANGE, 1, num, 0, timeLine);
         track.add(event);
 
-        event = makeMidiEvent(ShortMessage.NOTE_ON, 1, note, 100, timeLine+1);
+        event = makeMidiEvent(ShortMessage.NOTE_ON, 1, note, 100, timeLine + 1);
         track.add(event);
 
-        event = makeMidiEvent(ShortMessage.NOTE_OFF, 1, note, 100, timeLine+10);
+        event = makeMidiEvent(ShortMessage.NOTE_OFF, 1, note, 100, timeLine + 10);
         track.add(event);
 
         player.setSequence(seq);
         player.start();
     }
 
-//    helper func to properly create MIDI event
+    //    helper func to properly create MIDI event
     MidiEvent makeMidiEvent
-            (int type, int channel, int note, int velocity, int when) {
+    (int type, int channel, int note, int velocity, int when) {
         ShortMessage m = new ShortMessage();
         try {
             m.setMessage(type, channel, note, velocity);
@@ -159,7 +160,7 @@ public class MusicPlayer {
         return new MidiEvent(m, when);
     }
 
-    String getUserInput(String msg) throws IOException{
+    String getUserInput(String msg) throws IOException {
         BufferedReader keyboard = new BufferedReader(
                 new InputStreamReader(System.in));
         System.out.println(msg);
@@ -168,7 +169,7 @@ public class MusicPlayer {
 
     String getInstrumentNameByIndex(int index) {
         Synthesizer synt = new SoftSynthesizer();
-        index = index == 0 ? 0 : index-1;
+        index = index == 0 ? 0 : index - 1;
         Instrument instr = synt.getAvailableInstruments()[index];
         return instr.getName().trim();
     }
