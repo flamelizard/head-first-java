@@ -9,6 +9,9 @@ import java.util.Random;
 /**
  * Created by Tom on 4/28/2016.
  */
+/*
+Swing basics continued
+ */
 public class Gui2 {
     private JFrame win;
     private JButton colorChangeBtn;

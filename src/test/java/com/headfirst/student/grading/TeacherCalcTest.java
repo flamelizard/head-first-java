@@ -1,9 +1,6 @@
-package grading;
+package com.headfirst.student.grading;
 
 import com.headfirst.student.TeacherCalc;
-import com.headfirst.student.grading.Graduate;
-import com.headfirst.student.grading.Student;
-import com.headfirst.student.grading.Undergraduate;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
