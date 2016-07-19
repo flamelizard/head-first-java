@@ -10,27 +10,6 @@ import java.net.Socket;
 /**
  * Created by Tom on 6/28/2016.
  */
-/*
-Reading from a stream - READLINE
-
-Readline called on opened stream will block ("hang") until
-- receives string with trailing new line
-- stream is closed (EOF)
-
-In first case, readline will return string with new line stripped. Type of
-new line may depend on type of OS and may cause readline hang indefinitely in
-case of malformed new line character.
-
-Second case has readline returning null. This behaviour lends itself to
-putting readline in a while loop that exits upon receiving null.
-    "while ((line = stream.readline()) == null) {..."
-
-Writing to a stream
-1. Print string terminated by new line
-2. Force flush stream to immediately pass on string
-Closing stream is not required unless quiting connection altogether.
-
- */
 public class SimpleChatClient extends JPanel {
     public static final String SERVER_IP = "127.0.0.1";
     public static final short SERVER_PORT = 5000;
