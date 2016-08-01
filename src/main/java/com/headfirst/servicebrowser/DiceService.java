@@ -1,7 +1,6 @@
 package com.headfirst.servicebrowser;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by Tom on 7/27/2016.
@@ -17,7 +16,6 @@ public class DiceService implements Service {
         int border = 50;
         container.setBorder(BorderFactory.createEmptyBorder(
                 border, border, border, border));
-//        container.setBackground(Color.DARK_GRAY);
 
         Dice dice = new Dice();
         JButton rollBtn = new JButton("Roll'em!");
@@ -25,7 +23,6 @@ public class DiceService implements Service {
 
 //        Box centerColumn = Box.createVerticalBox();
         JPanel centerColumn = new JPanel();
-        centerColumn.setBackground(Color.red);
         centerColumn.setLayout(new BoxLayout(centerColumn, BoxLayout.PAGE_AXIS));
         centerColumn.add(dice);
         centerColumn.add(Box.createVerticalStrut(10));
@@ -41,7 +38,7 @@ public class DiceService implements Service {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(service.getGuiPanel());
         frame.pack();
-        frame.setLocation(800, 500);
+        frame.setLocation(300, 200);
         frame.setVisible(true);
     }
 

@@ -24,7 +24,7 @@ public class Dice extends JPanel {
         rand = new Random(System.currentTimeMillis());
         initDigitToDots();
         add(getDiceFace(6));
-        setBorder(BorderFactory.createDashedBorder(Color.BLUE));
+//        setBorder(BorderFactory.createDashedBorder(Color.BLUE));
     }
 
     private void initDigitToDots() {
@@ -42,9 +42,6 @@ public class Dice extends JPanel {
             digitToDots.put(mapping[i], Arrays.copyOfRange(
                     mapping, i + 1, i + mappingLen));
         }
-//        for (Integer k: digitToDots.keySet()) {
-//            System.out.println(k + "--" + Arrays.toString(digitToDots.get(k)));
-//        }
     }
 
     private JPanel getDiceFace(int digit) {
