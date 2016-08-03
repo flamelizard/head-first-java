@@ -1,4 +1,6 @@
-package com.headfirst.servicebrowser;
+package com.headfirst.servicebrowser.services;
+
+import com.headfirst.servicebrowser.Service;
 
 import javax.swing.*;
 

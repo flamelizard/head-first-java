@@ -1,4 +1,4 @@
-package com.headfirst.servicebrowser;
+package com.headfirst.servicebrowser.services;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +12,7 @@ import java.util.Random;
  */
 /*
 dice face is a grid 3 x 3
+Dice is JPanel contained in another JPanel to support live update
  */
 public class Dice extends JPanel {
     private final int MAX_VALUE = 6;
