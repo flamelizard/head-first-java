@@ -1,7 +1,5 @@
 package com.headfirst.servicebrowser.services;
 
-import com.headfirst.servicebrowser.Service;
-
 import javax.swing.*;
 import java.awt.*;
 import java.text.DateFormatSymbols;
@@ -13,8 +11,16 @@ import java.util.List;
  */
 /*
 Enter any date and show what day of the week it is (sunday, monday...)
+
+GridLayout
+Set number of rows and columns, 0 means no limit
+
+Spacing between cells setHgap, setVgap. Change at will during runtime
+directly on layout manager.
+
+Quite nice and esy manager.
  */
-public class DayOfTheWeek extends JPanel implements Service {
+public class DayOfTheWeek extends JPanel {
     private final JComboBox<Integer> year;
     private final JComboBox<String> month;
     private final JComboBox<Integer> day;
@@ -53,25 +59,21 @@ public class DayOfTheWeek extends JPanel implements Service {
         month.setBorder(BorderFactory.createEmptyBorder(
                 border, border, border, border));
 
-        JPanel comboBar = new JPanel();
-        comboBar.setLayout(new BoxLayout(comboBar, BoxLayout.LINE_AXIS));
-        comboBar.add(year);
-        comboBar.add(month);
-        comboBar.add(day);
-
         JButton send = new JButton("Send");
         send.addActionListener((event) -> calculateDayOfTheWeek());
         textDOTW = new JTextField(10);
         textDOTW.setFont(new Font("Helvetica", Font.PLAIN, 14));
 
-        JPanel bottomBar = new JPanel();
-        bottomBar.add(send);
-        bottomBar.add(Box.createHorizontalStrut(50));
-        bottomBar.add(textDOTW);
-
+        mainArea.setLayout(getCustomLayout());
         mainArea.add(question);
-        mainArea.add(comboBar);
-        mainArea.add(bottomBar);
+        mainArea.add(Box.createHorizontalBox());
+        mainArea.add(Box.createHorizontalBox());
+        mainArea.add(year);
+        mainArea.add(month);
+        mainArea.add(day);
+        mainArea.add(Box.createHorizontalBox());
+        mainArea.add(send);
+        mainArea.add(textDOTW);
 
         add(mainArea);
         setPreferredSize(new Dimension(500, 200));
@@ -82,14 +84,28 @@ public class DayOfTheWeek extends JPanel implements Service {
 
         JFrame frame = new JFrame("Day of the week");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(dotw.getGuiPanel());
+        frame.add(dotw);
         frame.pack();
         frame.setLocation(300, 200);
         frame.setVisible(true);
     }
 
-    public JPanel getGuiPanel() {
-        return this;
+    public static void printDate(Calendar c) {
+        String month = c.getDisplayName(
+                Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+
+        System.out.printf("%s-%s %s",
+                month, c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.YEAR));
+    }
+
+    private LayoutManager getCustomLayout() {
+        int gap = 5;
+        int cols = 0;
+        int rows = 3;
+        GridLayout layout = new GridLayout(cols, rows);
+        layout.setHgap(gap);
+        layout.setVgap(gap);
+        return layout;
     }
 
     private void calculateDayOfTheWeek() {
@@ -103,14 +119,6 @@ public class DayOfTheWeek extends JPanel implements Service {
         textDOTW.setText(calc.getDisplayName(
                 Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
 
-    }
-
-    private void printDate(Calendar c) {
-        String month = c.getDisplayName(
-                Calendar.MONTH, Calendar.LONG, Locale.getDefault());
-
-        System.out.printf("%s-%s %s",
-                month, c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.YEAR));
     }
 
 }
