@@ -12,6 +12,7 @@ Box class cannot set background color for the container. Use another JPanel.
  */
 public class DiceService implements Service {
     private JPanel container;
+    private Dice dice;
 
     public DiceService() {
         container = new JPanel();
@@ -19,9 +20,9 @@ public class DiceService implements Service {
         container.setBorder(BorderFactory.createEmptyBorder(
                 border, border, border, border));
 
-        Dice dice = new Dice();
+        dice = new Dice();
         JButton rollBtn = new JButton("Roll'em!");
-        rollBtn.addActionListener((event) -> dice.rollTheDice());
+        rollBtn.addActionListener((event) -> rollTheDice());
 
 //        Box centerColumn = Box.createVerticalBox();
         JPanel centerColumn = new JPanel();
@@ -42,6 +43,14 @@ public class DiceService implements Service {
         frame.pack();
         frame.setLocation(300, 200);
         frame.setVisible(true);
+    }
+
+    private void rollTheDice() {
+        dice.rollTheDice();
+//        dice.revalidate();
+//        dice.repaint();
+//        container.revalidate();
+//        container.repaint();
     }
 
     @Override

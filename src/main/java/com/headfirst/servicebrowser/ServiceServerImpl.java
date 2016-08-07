@@ -1,5 +1,9 @@
 package com.headfirst.servicebrowser;
 
+import com.headfirst.servicebrowser.services.BaseService;
+import com.headfirst.servicebrowser.services.DayOfTheWeekService;
+import com.headfirst.servicebrowser.services.DiceService;
+
 import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
@@ -15,9 +19,17 @@ public class ServiceServerImpl extends UnicastRemoteObject
         implements ServiceServer {
     private Map<String, Service> services = new HashMap<>();
 
-    public ServiceServerImpl() throws RemoteException, RegisterException {
+    public ServiceServerImpl() throws RemoteException, RMIException {
+        addServices();
         registerServiceServer("service-server");
+    }
 
+    public static void main(String[] args) {
+        try {
+            ServiceServerImpl server = new ServiceServerImpl();
+        } catch (RemoteException | RMIException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -31,13 +43,20 @@ public class ServiceServerImpl extends UnicastRemoteObject
     }
 
     private void registerServiceServer(String asName)
-            throws RegisterException {
+            throws RMIException {
 
         try {
             Naming.bind(asName, this);
         } catch (AlreadyBoundException | MalformedURLException | RemoteException e) {
-            String msg = String.format("%s: %s", asName, this.getClass());
-            throw new RegisterException(msg, e);
+            String msg = String.format(
+                    "Register service %s: %s", asName, this.getClass());
+            throw new RMIException(msg, e);
         }
+    }
+
+    private void addServices() {
+        services.put("Dice", new DiceService());
+        services.put("Day of the week", new DayOfTheWeekService());
+        services.put("Base", new BaseService());
     }
 }

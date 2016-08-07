@@ -1,5 +1,7 @@
 package com.headfirst.servicebrowser.services;
 
+import com.headfirst.servicebrowser.GuiUtils;
+
 import javax.swing.*;
 import java.awt.*;
 import java.text.DateFormatSymbols;
@@ -81,13 +83,7 @@ public class DayOfTheWeek extends JPanel {
 
     public static void main(String[] args) {
         DayOfTheWeek dotw = new DayOfTheWeek();
-
-        JFrame frame = new JFrame("Day of the week");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(dotw);
-        frame.pack();
-        frame.setLocation(300, 200);
-        frame.setVisible(true);
+        GuiUtils.showInFrame("Day of the week", dotw);
     }
 
     public static void printDate(Calendar c) {
@@ -118,6 +114,7 @@ public class DayOfTheWeek extends JPanel {
 
         textDOTW.setText(calc.getDisplayName(
                 Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
+        revalidate();
 
     }
 

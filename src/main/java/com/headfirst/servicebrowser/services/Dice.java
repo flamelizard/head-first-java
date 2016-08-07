@@ -79,6 +79,7 @@ public class Dice extends JPanel {
         removeAll();
         add(getDiceFace(rolledNum));
         revalidate();
+        repaint();
     }
 
     class Dot extends JPanel {
