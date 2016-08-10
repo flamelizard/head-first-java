@@ -1,6 +1,5 @@
 package com.headfirst.servicebrowser;
 
-import com.headfirst.servicebrowser.services.BaseService;
 import com.headfirst.servicebrowser.services.DayOfTheWeekService;
 import com.headfirst.servicebrowser.services.DiceService;
 
@@ -14,6 +13,13 @@ import java.util.Map;
 
 /**
  * Created by Tom on 7/25/2016.
+ */
+/*
+Binary "rmiregistry" has to run in order to register service (RemoteObject)
+
+Curiously, once the service has been registered, rmiregistry has to restart
+to bind a service under the same name. Even though the original service has
+been shut.
  */
 public class ServiceServerImpl extends UnicastRemoteObject
         implements ServiceServer {
@@ -55,8 +61,8 @@ public class ServiceServerImpl extends UnicastRemoteObject
     }
 
     private void addServices() {
+//        every services has to implement Serializable for network transfer
         services.put("Dice", new DiceService());
         services.put("Day of the week", new DayOfTheWeekService());
-        services.put("Base", new BaseService());
     }
 }

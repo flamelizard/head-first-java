@@ -12,6 +12,9 @@ import java.rmi.RemoteException;
 /**
  * Created by Tom on 8/3/2016.
  */
+/*
+Head First Java - Chapter 18, Remote deployment with RMI
+ */
 public class ServiceBrowser extends JPanel {
 
     private final JPanel widgetPane;
@@ -74,6 +77,7 @@ public class ServiceBrowser extends JPanel {
             Service serviceWidget = remoteStub.getService(name);
             widgetPane.removeAll();
             widgetPane.add(serviceWidget.getGuiPanel());
+//            always call both revalidate and repaint
             revalidate();
             repaint();
         } catch (RemoteException e) {

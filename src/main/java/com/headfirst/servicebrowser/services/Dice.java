@@ -12,7 +12,7 @@ import java.util.Random;
  */
 /*
 dice face is a grid 3 x 3
-Dice is JPanel contained in another JPanel to support live update
+Dice is JPanel contained in another JPanel to support live updates
  */
 public class Dice extends JPanel {
     private final int MAX_VALUE = 6;
@@ -25,7 +25,6 @@ public class Dice extends JPanel {
         rand = new Random(System.currentTimeMillis());
         initDigitToDots();
         add(getDiceFace(6));
-//        setBorder(BorderFactory.createDashedBorder(Color.BLUE));
     }
 
     private void initDigitToDots() {
@@ -83,7 +82,7 @@ public class Dice extends JPanel {
     }
 
     class Dot extends JPanel {
-        private final Point center;
+        private final Point topLeftBoundBox;
         private Color color;
         private int diameter;
         private int size;
@@ -95,14 +94,15 @@ public class Dice extends JPanel {
             if (diameter > size) {
                 throw new IllegalArgumentException("Diameter too big");
             }
-            center = new Point(size / 2 - diameter / 2, size / 2 - diameter / 2);
+            topLeftBoundBox = new Point(
+                    size / 2 - diameter / 2, size / 2 - diameter / 2);
 //            setBorder(BorderFactory.createLineBorder(Color.RED));
         }
 
         public void paintComponent(Graphics g) {
             g.setColor(color);
-            g.fillOval((int) center.getX(), (int) center.getY(),
-                    diameter, diameter);
+            g.fillOval((int) topLeftBoundBox.getX(),
+                    (int) topLeftBoundBox.getY(), diameter, diameter);
         }
 
         public Dimension getPreferredSize() {
